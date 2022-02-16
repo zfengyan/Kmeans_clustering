@@ -11,7 +11,7 @@ add_definitions(
 )
 
 # 将源代码添加到此项目的可执行文件。
-add_executable (Kmeans "src/Kmeans.cpp" "src/Kmeans.h")
+add_executable (Kmeans "src/main.cpp"  "src/ReadDataset.h" "src/ReadDataset.cpp" "src/Dataset.h" "src/Dataset.cpp" "src/Preprocessing.h" "src/Preprocessing.cpp")
 
 # TODO: 如有需要，请添加测试并安装目标。
 target_link_libraries(Kmeans PRIVATE
