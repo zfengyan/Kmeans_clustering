@@ -72,6 +72,22 @@ DatasetPtr ReadDataset::readxyz(const std::string& datapath) {
 			dataset->data(row_index, x) = lasreader->point.get_x();
 			dataset->data(row_index, y) = lasreader->point.get_y();
 			dataset->data(row_index, z) = lasreader->point.get_z();
+
+			/*
+			* Ground truth labels:
+			* Classification codes: https://desktop.arcgis.com/en/arcmap/latest/manage-data/las-dataset/lidar-point-classification.htm
+			* 000 - 099: building --> cluster: 6 (Building)
+			* 100 - 199: car --> cluster: 64 (User Definable)
+			* 200 - 299: fence --> cluster: 3 (Low Vegetation)
+			* 300 - 399: pole --> cluster: 66 (User Definable)
+			* 400 - 499: tree --> cluster: 5 (High Vegetation)
+			*/
+			if (i <= 99)dataset->cluster(row_index) = 6;
+			else if (i <= 199)dataset->cluster(row_index) = 54;
+			else if (i <= 299)dataset->cluster(row_index) = 3;
+			else if (i <= 399)dataset->cluster(row_index) = 66;
+			else if (i <= 499)dataset->cluster(row_index) = 5;
+
 			++row_index;
 		}
 

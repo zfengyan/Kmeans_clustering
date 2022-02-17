@@ -10,7 +10,7 @@ int main()
 	std::cout << "Hello CMake." << '\n';
 
 	DatasetPtr dataset(ReadDataset::readxyz(DATA_PATH));
-	// Preprocessing::meanNormalize(dataset);
+	Preprocessing::meanNormalize(dataset);
 
 	WriteDataset::output_dataset(DATA_PATH, dataset);
 	// std::cout << dataset->nrows; // total rows: 1246507
