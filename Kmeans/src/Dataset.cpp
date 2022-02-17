@@ -2,7 +2,7 @@
 
 Dataset::Dataset(std::size_t rows, std::size_t cols): Matrix(rows, cols){
     Cluster = std::make_unique<std::size_t[]>(rows);
-    for (std::size_t i = 0; i != rows; ++i)Cluster[i] = -1; // initialize with -1
+    for (std::size_t i = 0; i != rows; ++i)Cluster[i] = 0; // initialize with 0
 
     Min_dist = std::make_unique<double[]>(rows);
     for (std::size_t i = 0; i != rows; ++i)Min_dist[i] = _INFINITE_; // initialize with INFINITE
