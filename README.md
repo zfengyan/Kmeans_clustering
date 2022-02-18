@@ -2,10 +2,7 @@
 
 About classfication codes: https://desktop.arcgis.com/en/arcmap/latest/manage-data/las-dataset/lidar-point-classification.htm
 
-the input dataset(combining the 500 pointcloud files) -- dataset.laz:
+the input dataset(combining the 500 pointcloud files) -- dataset_truth.laz:
 
-![image](https://user-images.githubusercontent.com/72781910/154469488-06d307f4-06a4-42d0-ae8d-b050ad97ecfe.png)
+![image](https://user-images.githubusercontent.com/72781910/154722685-b0e57383-ccd9-47f6-bb0e-eb61ee04494c.png)
 
-the preprocessed(mean normalised, x,y,z three dimensions) dataset -- dataset_preprocessed.laz:
-
-![image](https://user-images.githubusercontent.com/72781910/154469622-ed28915b-cc93-40ce-908c-36e14ccfe087.png)
