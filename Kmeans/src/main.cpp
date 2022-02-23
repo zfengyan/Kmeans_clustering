@@ -4,16 +4,19 @@
 #include "ReadDataset.h"
 #include "Preprocessing.h"
 #include "WriteDataset.h"
+#include "Kmeans.h"
 
 int main()
 {
 	std::cout << "Hello CMake." << '\n';
 
 	DatasetPtr dataset(ReadDataset::readxyz(DATA_PATH));
-	Preprocessing::meanNormalize(dataset);
+	//Preprocessing::meanNormalize(dataset);
+
+	Kmenas::clusteringKmeans(dataset, 2, 100);
 
 	WriteDataset::output_dataset(DATA_PATH, dataset);
-	// std::cout << dataset->nrows; // total rows: 1246507
+	// std::cout << dataset->nrows; // total rows: 1246507	
 	
 	return 0;
 

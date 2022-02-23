@@ -7,11 +7,11 @@ cmake_minimum_required (VERSION 3.8)
 add_subdirectory(extern/LAStools) 
 
 add_definitions(
-  -DDATA_PATH=\"${PROJECT_SOURCE_DIR}/Kmeans/data\"
+  -DDATA_PATH=\"${PROJECT_SOURCE_DIR}/Kmeans/testdata\"
 )
 
 # 将源代码添加到此项目的可执行文件。
-add_executable (Kmeans "src/main.cpp"  "src/ReadDataset.h" "src/ReadDataset.cpp" "src/Dataset.h" "src/Dataset.cpp" "src/Preprocessing.h" "src/Preprocessing.cpp" "src/WriteDataset.h" "src/WriteDataset.cpp")
+add_executable (Kmeans "src/main.cpp"  "src/ReadDataset.h" "src/ReadDataset.cpp" "src/Dataset.h" "src/Dataset.cpp" "src/Preprocessing.h" "src/Preprocessing.cpp" "src/WriteDataset.h" "src/WriteDataset.cpp"  "src/Kmeans.h"  "src/Kmeans.cpp")
 
 # TODO: 如有需要，请添加测试并安装目标。
 target_link_libraries(Kmeans PRIVATE
@@ -19,7 +19,7 @@ target_link_libraries(Kmeans PRIVATE
 )
 
 set_target_properties(Kmeans PROPERTIES 
-  CXX_STANDARD 17
+  CXX_STANDARD 11
 )
 
 # Make the executable a default target to build & run in Visual Studio

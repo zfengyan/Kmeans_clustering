@@ -14,7 +14,7 @@ void WriteDataset::output_dataset(const std::string& filepath, DatasetPtr datase
     laswriteopener.set_file_name(filename.c_str());
 
     LASheader lasheader;
-    lasheader.x_scale_factor = 0.01;
+    lasheader.x_scale_factor = 0.01; // 0.01
     lasheader.y_scale_factor = 0.01;
     lasheader.z_scale_factor = 0.01;
     lasheader.x_offset = 0.0;

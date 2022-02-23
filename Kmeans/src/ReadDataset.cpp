@@ -38,7 +38,7 @@ DatasetPtr ReadDataset::readxyz(const std::string& datapath) {
 	std::string format = ".xyz";
 	GetAllFormatFiles(datapath, files, format);
 
-	std::size_t nrows(1276507); // to speed up the process of read dataset, obtain the total rows in advance
+	std::size_t nrows(2076); // to speed up the process of read dataset, obtain the total rows in advance
 	std::size_t ncols(3); // 3 dimensions: x, y, z
 	DatasetPtr dataset = std::make_shared<Dataset>(nrows, ncols);
 	std::cout << "reading dataset..." << '\n';
@@ -82,11 +82,11 @@ DatasetPtr ReadDataset::readxyz(const std::string& datapath) {
 			* 300 - 399: pole --> cluster: 66 (User Definable)
 			* 400 - 499: tree --> cluster: 5 (High Vegetation)
 			*/
-			if (i <= 99)dataset->cluster(row_index) = 6;
+			/*if (i <= 99)dataset->cluster(row_index) = 6;
 			else if (i <= 199)dataset->cluster(row_index) = 54;
 			else if (i <= 299)dataset->cluster(row_index) = 3;
 			else if (i <= 399)dataset->cluster(row_index) = 66;
-			else if (i <= 499)dataset->cluster(row_index) = 5;
+			else if (i <= 499)dataset->cluster(row_index) = 5;*/
 
 			++row_index;
 		}

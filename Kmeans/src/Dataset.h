@@ -51,7 +51,11 @@ public:
 
     double euclideanDistance(std::size_t row_a, std::size_t row_b);
 
+    double euclideanDistance(DatasetPtr centroids, std::size_t centerid, std::size_t row);
+
     double manhattanDistance(std::size_t row_a, std::size_t row_b);
+
+    double manhattanDistance(DatasetPtr centroids, std::size_t centerid, std::size_t row);
 
     virtual ~Dataset() = default;
 };

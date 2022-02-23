@@ -18,11 +18,31 @@ double Dataset::euclideanDistance(std::size_t row_a, std::size_t row_b){
     return sqrt(sum);
 }
 
+double Dataset::euclideanDistance(DatasetPtr centroids, std::size_t centerid, std::size_t row)
+{
+    double squared_dist(0);
+    double sum(0);
+    for (std::size_t j = 0; j < ncols; ++j) {
+        squared_dist = (centroids->data(centerid, j) - data(row, j)) * (centroids->data(centerid, j) - data(row, j));
+        sum += squared_dist;
+    }
+    return sqrt(sum);
+}
+
 double Dataset::manhattanDistance(std::size_t row_a, std::size_t row_b)
 {
     double sum(0);
     for (std::size_t j = 0; j < ncols; ++j) {
         sum += abs(data(row_a, j) - data(row_b, j));
+    }
+    return sum;
+}
+
+double Dataset::manhattanDistance(DatasetPtr centroids, std::size_t centerid, std::size_t row)
+{
+    double sum(0);
+    for (std::size_t j = 0; j < ncols; ++j) {
+        sum += abs(centroids->data(centerid, j) - data(row, j));
     }
     return sum;
 }
