@@ -40,12 +40,19 @@ class Dataset : public Matrix {
 private:
     ClusteridPtr Cluster; // cluster result of each row
     ArrayPtr Min_dist; // minimum distance of each row
+
+    ClusteridPtr Fileid; // belongs to which file
+    ClusteridPtr Truthid; // true cluster id
 public:
     Dataset(std::size_t rows, std::size_t cols);
 
     std::size_t& cluster(std::size_t row) { return Cluster[row]; } // declaration and definition inside .h file(inline suggested)
 
     double& min_dist(std::size_t row) { return Min_dist[row]; }
+
+    std::size_t& fileid(std::size_t row) { return Fileid[row]; } // access and change the values of private members
+
+    std::size_t& truthid(std::size_t row) { return Truthid[row]; }
 
     void shuffle() {} // randomly arrange the original data
 

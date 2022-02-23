@@ -6,6 +6,12 @@ Dataset::Dataset(std::size_t rows, std::size_t cols): Matrix(rows, cols){
 
     Min_dist = std::make_unique<double[]>(rows);
     for (std::size_t i = 0; i != rows; ++i)Min_dist[i] = _INFINITE_; // initialize with INFINITE
+
+    Fileid = std::make_unique<std::size_t[]>(rows);
+    for (std::size_t i = 0; i != rows; ++i)Fileid[i] = 0; // initialize with 0
+
+    Truthid = std::make_unique<std::size_t[]>(rows);
+    for (std::size_t i = 0; i != rows; ++i)Truthid[i] = 0; // initialize with 0
 }
 
 double Dataset::euclideanDistance(std::size_t row_a, std::size_t row_b){

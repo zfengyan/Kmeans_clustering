@@ -1,3 +1,2 @@
-Change dataset:  change nrows in readxyz() funcrtion;
-writeDataset.cpp: x_scale_factor set to 1;
+Change dataset:  change nrows and ncols in readxyz() funcrtion;
 DATA_PATH setting

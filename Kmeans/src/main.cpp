@@ -10,14 +10,16 @@ int main()
 {
 	std::cout << "Hello CMake." << '\n';
 
-	DatasetPtr dataset(ReadDataset::readxyz(DATA_PATH));
-	//Preprocessing::meanNormalize(dataset);
+	DatasetPtr origin_dataset = ReadDataset::readxyz(DATA_PATH, 1276507, 3).first;
 
-	Kmenas::clusteringKmeans(dataset, 2, 100);
+	//Preprocessing::meanNormalize(clsteringDataset);
 
-	WriteDataset::output_dataset(DATA_PATH, dataset);
-	// std::cout << dataset->nrows; // total rows: 1246507	
+	//Kmenas::clusteringKmeans(originDataset, 2, 100);
+
+	//WriteDataset::output_dataset(DATA_PATH, origin_dataset);
+	// std::cout << dataset->nrows; // total rows: 1276507	
 	
+
 	return 0;
 
 }
