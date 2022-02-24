@@ -23,10 +23,12 @@ int main()
 
 	Kmeans::clusteringKmeans(clustering_dataset, 3, 100); // clusters, iteration
 
-	WriteDataset::output_dataset(DATA_PATH, clustering_dataset);
+	// WriteDataset::output_dataset(DATA_PATH, clustering_dataset);
 	// std::cout << dataset->nrows; // total rows: 1276507	
 	
 	double evaluate = Evaluation::evaluation(clustering_dataset, 3); // k=3
+
+	//WriteDataset::output_dataset(DATA_PATH, clustering_dataset);
 
 	return 0;
 

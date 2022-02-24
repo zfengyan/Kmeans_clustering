@@ -144,7 +144,78 @@ double Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k)
     /*
     * select the majority of the clustering results as labels
     */
+
+    // count[k] : store all the ids belongs to cluster k
+    std::vector<std::vector<std::size_t>> count;
+
+    // initialize
+    for (std::size_t i = 0; i != k; ++i)
+    {
+        std::vector<std::size_t> each_cluster;
+        count.emplace_back(each_cluster);
+    }
+
+    // for each record(feature point)
+    for (std::size_t i = 0; i != clustering_dataset->nrows; ++i) 
+    {
+        for (std::size_t cid = 0; cid != k; ++cid)
+        {
+            if (clustering_dataset->cluster(i) == cid)count[cid].emplace_back(i);
+        }
+
+    } // end for: each record(feature points)
+
+    int a[5]{}; // the ground truth
+    a[0] = 6;
+    a[1] = 54;
+    a[2] = 3;
+    a[3] = 66;
+    a[4] = 5;
     
+    for (auto& each_cluster : count) // for each cluster
+    {
+        int b[5]{}; // count for each label
+
+        for (auto& index : each_cluster) // for each row in one cluster
+        {
+            if (clustering_dataset->truthid(index) == a[0])b[0] += 1;
+            else if (clustering_dataset->truthid(index) == a[1])b[1] += 1;
+            else if (clustering_dataset->truthid(index) == a[2])b[2] += 1;
+            else if (clustering_dataset->truthid(index) == a[3])b[3] += 1;
+            else if (clustering_dataset->truthid(index) == a[4])b[4] += 1;
+        } // end for: each row in one clusters
+
+        std::cout << b[0] << " " << b[1] << " " << b[2] << " " << b[3] << " " << b[4] << '\n';
+
+        // sort
+        // NOT sort the elements in array b, sort b[0]~b[5]
+        int biggest(0);
+        int biggest_type(0);
+
+        biggest = biggest > b[0] ? biggest : b[0];
+        biggest = biggest > b[1] ? biggest : b[1];
+        biggest = biggest > b[2] ? biggest : b[2];
+        biggest = biggest > b[3] ? biggest : b[3];
+        biggest = biggest > b[4] ? biggest : b[4];
+
+        if (biggest = b[0])biggest_type = 0;
+        else if (biggest = b[1])biggest_type = 1;
+        else if (biggest = b[2])biggest_type = 2;
+        else if (biggest = b[3])biggest_type = 3;
+        else if (biggest = b[4])biggest_type = 4;
+
+        std::cout << biggest << '\n';
+
+        // set the majority as the classification result
+        for (auto& index : each_cluster) // for each row in one cluster
+        {
+            clustering_dataset->cluster(index) = a[biggest_type];
+        }
+
+        std::cout << "each cluster: " << "\n";
+
+    } // end for: each cluster
+
     return 0;
 
 }
