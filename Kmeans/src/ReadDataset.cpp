@@ -127,7 +127,7 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 	std::cout << "number of rows of original dataset: " << nrows << '\n'; // total rows: 1276507 
 	std::cout << '\n';
 
-	return std::pair<DatasetPtr, DatasetPtr>(origin_dataset, clustering_dataset);
+	return std::make_pair(origin_dataset, clustering_dataset);
 
 }
 

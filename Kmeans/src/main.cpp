@@ -8,6 +8,8 @@
 
 int main()
 {
+	std::ios::sync_with_stdio(false); // speed up for std::cin and std::cout
+
 	std::cout << "Hello CMake." << '\n';
 
 	DatasetPtr origin_dataset = ReadDataset::readxyz(DATA_PATH, 1276507, 3).first;
