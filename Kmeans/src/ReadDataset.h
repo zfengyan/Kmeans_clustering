@@ -37,15 +37,10 @@ public:
 	static std::pair<DatasetPtr, DatasetPtr> readxyz(
 		const std::string& datapath,
 		std::size_t p_nrows,
-		std::size_t p_ncols);
+		std::size_t p_ncols,
+		std::size_t p_num_rows,
+		std::size_t p_num_attributes);
 
-	/*
-	* construct the dataset needs to be clustered according to the original dataset
-	*/
-	static DatasetPtr ClusteringDataset(
-		DatasetPtr originDataset,
-		std::size_t p_nrows,
-		std::size_t p_ncols);
 };
 
 

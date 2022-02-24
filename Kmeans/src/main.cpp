@@ -12,13 +12,18 @@ int main()
 
 	std::cout << "Hello CMake." << '\n';
 
-	DatasetPtr origin_dataset = ReadDataset::readxyz(DATA_PATH, 1276507, 3).first;
+	std::pair<DatasetPtr, DatasetPtr> dataset_pair;
+	dataset_pair = ReadDataset::readxyz(DATA_PATH, 1276507, 3, 500, 3);
 
-	//Preprocessing::meanNormalize(clsteringDataset);
+	DatasetPtr origin_dataset = dataset_pair.first;
+	DatasetPtr clustering_dataset = dataset_pair.second;
+
+
+	Preprocessing::meanNormalize(clustering_dataset);
 
 	//Kmenas::clusteringKmeans(originDataset, 2, 100);
 
-	//WriteDataset::output_dataset(DATA_PATH, origin_dataset);
+	WriteDataset::output_dataset(DATA_PATH, clustering_dataset);
 	// std::cout << dataset->nrows; // total rows: 1276507	
 	
 

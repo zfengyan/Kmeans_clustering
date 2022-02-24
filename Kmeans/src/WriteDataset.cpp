@@ -42,7 +42,7 @@ void WriteDataset::output_dataset(const std::string& filepath, DatasetPtr datase
         laspoint.set_z(dataset->data(i, z));
 
         // set classification
-        laspoint.set_classification((int)dataset->cluster(i));
+        laspoint.set_classification((int)dataset->truthid(i));
 
         // write points
         laswriter->write_point(&laspoint);

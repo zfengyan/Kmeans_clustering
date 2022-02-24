@@ -1,6 +1,8 @@
 #include "ReadDataset.h"
 
-
+/*
+* get all certain format files in one data folder
+*/
 void ReadDataset::GetAllFormatFiles(const std::string& path, std::vector<std::string>& files, const std::string& format)
 {
 	//file handle
@@ -37,7 +39,9 @@ void ReadDataset::GetAllFormatFiles(const std::string& path, std::vector<std::st
 std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 	const std::string& datapath,
 	std::size_t p_nrows,
-	std::size_t p_ncols) 
+	std::size_t p_ncols,
+	std::size_t p_num_rows,
+	std::size_t p_num_attributes) 
 {
 	std::vector<std::string> files;
 
@@ -54,7 +58,7 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 	std::size_t x(0), y(1), z(2); // col indexes
 
 	// clustering dataset: 500*n
-	DatasetPtr clustering_dataset = std::make_shared<Dataset>(500, 2);
+	DatasetPtr clustering_dataset = std::make_shared<Dataset>(p_num_rows, p_num_attributes);
 
 	for (std::size_t i = 0; i != files.size(); ++i) // for each pointcloud file, it contains multiple points, there are 500 files
 	{
@@ -68,6 +72,7 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 			std::cerr << "cannot read las file: " << filename << "\n";
 			exit(1);
 		}
+
 
 		// used to store all the points in one file
 		// to calculate attributes
@@ -117,9 +122,51 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 		delete lasreader;
 		lasreader = nullptr;
 
-		//process points in each file
-		//clustering_dataset->data(i,j) --> 500 fies, 500 feature points
+		/*
+		process points in each file
+		design attributes here
+		*/
+		double max_x(0), min_x(_INFINITE_); // maximum and minimum x, NB: different initialized values
+		double max_y(0), min_y(_INFINITE_); // maximum and minimum y
+		double max_z(0), min_z(_INFINITE_); // maximum and minimum z
 
+		double accumulate_x(0), accumulate_y(0);
+		
+		for (auto& p : points_in_one_file)
+		{
+			max_x = p.x > max_x ? p.x : max_x;
+			min_x = p.x < min_x ? p.x : min_x;
+
+			max_y = p.y > max_y ? p.y : max_y;
+			min_y = p.y < min_y ? p.y : min_y;
+
+			max_z = p.z > max_z ? p.z : max_z;
+			min_z = p.z < min_z ? p.z : min_z;
+
+			accumulate_x += p.x;
+			accumulate_y += p.y;
+		}
+
+		double area = (max_x - min_x) * (max_y - min_y);
+		double height_diff = max_z - min_z;
+
+		double avg_x = accumulate_x / points_in_one_file.size();
+		double avg_y = accumulate_y / points_in_one_file.size();
+
+		//clustering_dataset->data(i, j)-- > 500 fies, 500 feature points
+		//for each feature point : data(i, j) -- j is the column(attribute)
+		//one file corresponds to one feature point
+		clustering_dataset->data(i, 0) = area;
+		clustering_dataset->data(i, 1) = height_diff;
+		clustering_dataset->data(i, 2) = 0; // for output
+
+		clustering_dataset->fileid(i) = i;
+
+		if (i <= 99)clustering_dataset->truthid(i) = 6;
+		else if (i <= 199)clustering_dataset->truthid(i) = 54;
+		else if (i <= 299)clustering_dataset->truthid(i) = 3;
+		else if (i <= 399)clustering_dataset->truthid(i) = 66;
+		else if (i <= 499)clustering_dataset->truthid(i) = 5;
 
 	} // end for : all 500 files
 
@@ -131,15 +178,3 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 
 }
 
-
-DatasetPtr ReadDataset::ClusteringDataset(DatasetPtr origin_dataset, 
-	std::size_t p_nrows, 
-	std::size_t p_ncols)
-{
-	std::size_t nrows(p_nrows); 
-	std::size_t ncols(p_ncols);
-	DatasetPtr clustering_dataset = std::make_shared<Dataset>(nrows, ncols);
-	std::cout << "constructing clstering dataset..." << '\n';
-
-	return clustering_dataset;
-}
