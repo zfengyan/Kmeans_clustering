@@ -39,10 +39,11 @@ void WriteDataset::output_dataset(const std::string& filepath, DatasetPtr datase
         // set xyz of points(the xyz coordinates are preprocessed)
         laspoint.set_x(dataset->data(i, x));
         laspoint.set_y(dataset->data(i, y));
-        laspoint.set_z(dataset->data(i, z));
+        laspoint.set_z(0); // now the clustering_dataset only has two attributes
+        //laspoint.set_z(dataset->data(i, z));
 
         // set classification
-        laspoint.set_classification((int)dataset->truthid(i));
+        laspoint.set_classification((int)dataset->cluster(i));
 
         // write points
         laswriter->write_point(&laspoint);

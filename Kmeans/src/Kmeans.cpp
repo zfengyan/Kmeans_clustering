@@ -6,7 +6,6 @@ void Kmenas::clusteringKmeans(DatasetPtr dataset, std::size_t k, std::size_t ite
     std::size_t n(dataset->nrows);
     assert(k <= n);
 
-
     /*
     randomly select the initial clustering points
     using std::random_shuffle
@@ -19,10 +18,10 @@ void Kmenas::clusteringKmeans(DatasetPtr dataset, std::size_t k, std::size_t ite
 
 
     // centroid_index[i]: selected centroid row_index
-    // for(std::size_t i = 0; i != k; ++i)
-    // {
-    //      centroid_index_in_origin[i]; // --> the index of selected k initial rows(points)
-    // }
+    //for(std::size_t i = 0; i != k; ++i)
+    //{
+    //     std::cout<<centroid_index_in_origin[i]<<'\n'; // --> the index of selected k initial rows(points)
+    //}
 
     //used for store the k centroid points(rows)
     //centroids: k*ncols matrix with some attributes
@@ -50,9 +49,11 @@ void Kmenas::clusteringKmeans(DatasetPtr dataset, std::size_t k, std::size_t ite
 
                 double dist(0);
                 dist = dataset->manhattanDistance(centroids, centerid, row); // calculate the distance between centerid and this row(point)
+                
                 if (dist < dataset->min_dist(row)) {
                     dataset->min_dist(row) = dist;
                     dataset->cluster(row) = centerid;
+                    
                 }
             }
         }

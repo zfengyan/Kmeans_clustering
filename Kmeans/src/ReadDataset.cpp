@@ -158,7 +158,6 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 		//one file corresponds to one feature point
 		clustering_dataset->data(i, 0) = area;
 		clustering_dataset->data(i, 1) = height_diff;
-		clustering_dataset->data(i, 2) = 0; // for output
 
 		clustering_dataset->fileid(i) = i;
 
