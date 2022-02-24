@@ -1,7 +1,7 @@
 #include "Kmeans.h"
 
 
-void Kmenas::clusteringKmeans(DatasetPtr dataset, std::size_t k, std::size_t iterations)
+void Kmeans::clusteringKmeans(DatasetPtr dataset, std::size_t k, std::size_t iterations)
 {
     std::size_t n(dataset->nrows);
     assert(k <= n);
@@ -137,3 +137,14 @@ void Kmenas::clusteringKmeans(DatasetPtr dataset, std::size_t k, std::size_t ite
 
 
 } // end for: fucntion clustering
+
+
+double Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k)
+{
+    /*
+    * select the majority of the clustering results as labels
+    */
+    
+    return 0;
+
+}
