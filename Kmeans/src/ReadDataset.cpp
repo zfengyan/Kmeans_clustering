@@ -130,7 +130,7 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 		double max_y(0), min_y(_INFINITE_); // maximum and minimum y
 		double max_z(0), min_z(_INFINITE_); // maximum and minimum z
 
-		double accumulate_x(0), accumulate_y(0);
+		//double accumulate_x(0), accumulate_y(0);
 		
 		for (auto& p : points_in_one_file)
 		{
@@ -143,15 +143,15 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 			max_z = p.z > max_z ? p.z : max_z;
 			min_z = p.z < min_z ? p.z : min_z;
 
-			accumulate_x += p.x;
-			accumulate_y += p.y;
+			//accumulate_x += p.x;
+			//accumulate_y += p.y;
 		}
 
 		double area = (max_x - min_x) * (max_y - min_y);
 		double height_diff = max_z - min_z;
 
-		double avg_x = accumulate_x / points_in_one_file.size();
-		double avg_y = accumulate_y / points_in_one_file.size();
+		//double avg_x = accumulate_x / points_in_one_file.size();
+		//double avg_y = accumulate_y / points_in_one_file.size();
 
 		//clustering_dataset->data(i, j)-- > 500 fies, 500 feature points
 		//for each feature point : data(i, j) -- j is the column(attribute)
@@ -167,6 +167,7 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 		else if (i <= 299)clustering_dataset->truthid(i) = 3;
 		else if (i <= 399)clustering_dataset->truthid(i) = 66;
 		else if (i <= 499)clustering_dataset->truthid(i) = 5;
+
 
 	} // end for : all 500 files
 
