@@ -186,7 +186,8 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 	} // end for : all 500 files
 
 	std::cout << "reading dataset done" << '\n';
-	std::cout << "number of rows of original dataset: " << nrows << '\n'; // total rows: 1276507 
+	std::cout << "number of rows(points) of original dataset(all the points in 500 point cloud files): " 
+		<< nrows << '\n'; // total rows: 1276507 
 	std::cout << '\n';
 
 	return std::make_pair(origin_dataset, clustering_dataset);

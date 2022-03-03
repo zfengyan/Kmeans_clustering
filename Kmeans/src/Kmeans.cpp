@@ -139,7 +139,10 @@ void Kmeans::clusteringKmeans(DatasetPtr dataset, std::size_t k, std::size_t ite
 } // end for: fucntion clustering
 
 
-void Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k, std::vector<double>& accuracy)
+void Evaluation::evaluation(
+    DatasetPtr clustering_dataset, 
+    std::size_t k, 
+    std::pair<std::vector<double>, std::vector<std::size_t>>& result_pair)
 {
     /*
     * select the majority of the clustering results as labels
@@ -182,7 +185,7 @@ void Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k, std::v
     type_label_map.insert(std::pair<int, std::string>(4, "tree"));
 
     std::cout << "------------------------" << " "
-        << "mapping for the biggest type and ground truth labels: "
+        << "Mapping for the type - ground truth - labels: "
         << " " << "------------------------" << '\n';
 
     std::cout << "type: " << 0 << std::setw(10) << "truth: " << a[0]
@@ -281,11 +284,12 @@ void Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k, std::v
             else ++wrong;
         }
         std::cout << "Statistics: " << '\n';
-        std::cout << "Correct results: " << correct << '\n';
-        std::cout << "Wrong results: " << wrong << '\n';
+        std::cout << "Correct results: " << correct << " " << "out of " << (correct + wrong) << '\n';
+        std::cout << "Wrong results: " << wrong << " " << "out of " << (correct + wrong) << '\n';
 
         double accuracy_each_group = correct / (correct + wrong);
-        accuracy.emplace_back(accuracy_each_group); // add it to the accuracy vector
+        result_pair.first.emplace_back(accuracy_each_group); // add it to the accuracy vector
+        result_pair.second.emplace_back((std::size_t)correct); // add correct numbers to the correctNums vector
 
         std::cout << "accuracy = " << accuracy_each_group << '\n';
         std::cout << '\n';

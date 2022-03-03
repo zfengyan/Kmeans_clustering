@@ -36,23 +36,50 @@ int main()
 	
 	std::vector<double> accuracy; // accuracy for each cluster group
 	accuracy.reserve(k);
-	Evaluation::evaluation(clustering_dataset, k, accuracy); // k=3
+
+	std::vector<std::size_t> correctNums; // numbers for correct results
+	correctNums.reserve(500); // maximum numbers: 500(500 feature points in total)
+
+	std::pair<std::vector<double>, std::vector<std::size_t>> result_pair;
+
+	Evaluation::evaluation(clustering_dataset, k, result_pair);
 
 	/*
-	* calculate the accuracy
+	* calculate the overall statistics
 	*/
-	double accuracy_N = (double)accuracy.size();
+
+	// calculate the avg accuracy
+	double accuracy_N = (double)result_pair.first.size(); // result_pair.first: accuracy vector
 	double accumulate(0);
 	double accumulated_accuracy(0);
-	for (auto& a : accuracy)
+	for (auto& a : result_pair.first)
 	{
 		accumulate += a;
 	}
 	accumulated_accuracy = accumulate / accuracy_N;
 
-	std::cout << "------------------------" << " " << "Overall accuracy: "
+	// calculate the numbers of correct records and wrong records
+	std::size_t correctResultNum(0);
+	for (auto& recordNum : result_pair.second)
+	{
+		correctResultNum += recordNum;
+	}
+	std::size_t wrongResultNum = 500 - correctResultNum;
+
+	// calculate the overall accuracy
+	double overall_accuracy = (double)correctResultNum / 500;
+
+	// print the overall statistics
+	std::cout << "------------------------" << " " << "Overall statistics: "
 		<< " " << " " << "------------------------" << '\n';
-	std::cout << "Accuracy = " << accumulated_accuracy << '\n';
+
+	std::cout << "Numbers: " << '\n';
+	std::cout << "Correct numbers: " << correctResultNum << " " << "out of " << 500 << '\n';
+	std::cout << "Wrong numbers: " << wrongResultNum << " " << "out of " << 500 << '\n';
+	std::cout << '\n';
+	std::cout << "Accuracy: " << '\n';
+	std::cout << "Unweighted avg accuracy = " << accumulated_accuracy << '\n';
+	std::cout << "Overall accuracy = " << overall_accuracy << '\n';
 
 	// WriteDataset::output_dataset(DATA_PATH, clustering_dataset); // call WriteDataset function
 	// after evaluation() 
