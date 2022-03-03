@@ -5,6 +5,7 @@
 #include <cassert>
 #include <vector>
 #include <algorithm>
+#include <map>
 #include "Dataset.h"
 
 class Kmeans {

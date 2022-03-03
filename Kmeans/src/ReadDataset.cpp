@@ -78,6 +78,8 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 		// to calculate attributes
 		std::vector<Point> points_in_one_file;
 
+		// read in points in one pcloud file
+		double count_points(0); // count the number of points in one single file
 		while (lasreader->read_point()) { 
 			// each point is one row in the dataset
 			// access the x,y,z data of each point
@@ -114,6 +116,7 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 			origin_dataset->fileid(row_index) = i; // i is the file index(0~500)
 
 			++row_index;
+			++count_points;
 		} // end while : all the points in one file
 
 		// close the file
@@ -121,6 +124,7 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 
 		delete lasreader;
 		lasreader = nullptr;
+
 
 		/*
 		process points in each file
@@ -132,6 +136,7 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 
 		//double accumulate_x(0), accumulate_y(0);
 		
+		// get the maximum and minimum xyz values
 		for (auto& p : points_in_one_file)
 		{
 			max_x = p.x > max_x ? p.x : max_x;
@@ -147,17 +152,25 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 			//accumulate_y += p.y;
 		}
 
+
+		/*
+		* designed attributes
+		*/
 		double area = (max_x - min_x) * (max_y - min_y);
 		double height_diff = max_z - min_z;
+		double density = area > 0 ? (count_points / area) : 0;
 
-		//double avg_x = accumulate_x / points_in_one_file.size();
-		//double avg_y = accumulate_y / points_in_one_file.size();
 
-		//clustering_dataset->data(i, j)-- > 500 fies, 500 feature points
-		//for each feature point : data(i, j) -- j is the column(attribute)
-		//one file corresponds to one feature point
+		/*
+		* assign designed attributes
+		* 
+		* clustering_dataset->data(i, j)-- > 500 fies, 500 feature points
+		* for each feature point : data(i, j) -- j is the column(attribute)
+		* one file corresponds to one feature point
+		*/
 		clustering_dataset->data(i, 0) = area;
 		clustering_dataset->data(i, 1) = height_diff;
+		clustering_dataset->data(i, 2) = density;
 
 		clustering_dataset->fileid(i) = i;
 

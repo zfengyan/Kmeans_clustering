@@ -165,25 +165,40 @@ void Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k, std::v
 
     } // end for: each record(feature points)
 
-    int a[5]{}; // the ground truth
+    // the type - ground truth
+    int a[5]{}; 
     a[0] = 6;
     a[1] = 54;
     a[2] = 3;
     a[3] = 66;
     a[4] = 5;
+
+    // the type - ground truth - label
+    std::map<int, std::string> type_label_map;
+    type_label_map.insert(std::pair<int, std::string>(0, "building"));
+    type_label_map.insert(std::pair<int, std::string>(1, "car"));
+    type_label_map.insert(std::pair<int, std::string>(2, "fence"));
+    type_label_map.insert(std::pair<int, std::string>(3, "pole"));
+    type_label_map.insert(std::pair<int, std::string>(4, "tree"));
+
     std::cout << "------------------------" << " "
         << "mapping for the biggest type and ground truth labels: "
         << " " << "------------------------" << '\n';
 
-    std::cout << "type: " << 0 << " " << " " << "truth: " << a[0] << "  " << "building" << '\n';
+    std::cout << "type: " << 0 << " " << " " << "truth: " << a[0]
+        << " " << " " << "label: " << type_label_map[0] << '\n';
 
-    std::cout << "type: " << 1 << " " << " " << "truth: " << a[1] << "  " << "car" << '\n';
+    std::cout << "type: " << 1 << " " << " " << "truth: " << a[1]
+        << " " << " " << "label: " << type_label_map[1] << '\n';
 
-    std::cout << "type: " << 2 << " " << " " << "truth: " << a[2] << "  " << "fence" << '\n';
+    std::cout << "type: " << 2 << " " << " " << "truth: " << a[2]
+        << " " << " " << "label: " << type_label_map[2] << '\n';
 
-    std::cout << "type: " << 3 << " " << " " << "truth: " << a[3] << "  " << "pole" << '\n';
+    std::cout << "type: " << 3 << " " << " " << "truth: " << a[3]
+        << " " << " " << "label: " << type_label_map[3] << '\n';
 
-    std::cout << "type: " << 4 << " " << " " << "truth: " << a[4] << "  " << "tree" << '\n';
+    std::cout << "type: " << 4 << " " << " " << "truth: " << a[4]
+        << " " << " " << "label: " << type_label_map[4] << '\n';
 
     std::cout << '\n';
     
@@ -206,15 +221,26 @@ void Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k, std::v
         std::cout << "numbers of each truth label: " << '\n';
 
         std::cout << "type: " << 0 << " " << " " << "truth: " << a[0]
+            << " " << " " << "label: " << type_label_map[0]
             << " " << " " << "numbers: " << b[0] << '\n';
+
         std::cout << "type: " << 1 << " " << " " << "truth: " << a[1]
+            << " " << " " << "label: " << type_label_map[1]
             << " " << " " << "numbers: " << b[1] << '\n';
+
         std::cout << "type: " << 2 << " " << " " << "truth: " << a[2]
+            << " " << " " << "label: " << type_label_map[2]
             << " " << " " << "numbers: " << b[2] << '\n';
+
         std::cout << "type: " << 3 << " " << " " << "truth: " << a[3]
+            << " " << " " << "label: " << type_label_map[3]
             << " " << " " << "numbers: " << b[3] << '\n';
+
         std::cout << "type: " << 4 << " " << " " << "truth: " << a[4]
+            << " " << " " << "label: " << type_label_map[4]
             << " " << " " << "numbers: " << b[4] << '\n';
+
+        std::cout << '\n';
 
         // sort
         // NOT sort the elements in array b, sort b[0]~b[5]
@@ -234,7 +260,8 @@ void Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k, std::v
         else if (biggest == b[4])biggest_type = 4;
 
         std::cout << "type with the biggest numbers: " << biggest_type << '\n';
-        std::cout << "selected cluster result for current group: " << a[biggest_type] << '\n';
+        std::cout << "selected truth for current group's clustering result: " << a[biggest_type] << '\n';
+        std::cout << "label for this cluster group: " << type_label_map[biggest_type] << '\n';
         std::cout << '\n';
 
         // set the majority as the classification result
