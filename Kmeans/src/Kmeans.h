@@ -14,7 +14,7 @@ public:
 
 class Evaluation {
 public:
-	static double evaluation(DatasetPtr clustering_dataset, std::size_t k);
+	static void evaluation(DatasetPtr clustering_dataset, std::size_t k, std::vector<double>& accuracy);
 };
 
 #endif // !_KMEANS_

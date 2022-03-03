@@ -13,22 +13,24 @@ int main()
 	std::cout << "Hello CMake." << '\n';
 
 	std::pair<DatasetPtr, DatasetPtr> dataset_pair;
-	dataset_pair = ReadDataset::readxyz(DATA_PATH, 1276507, 3, 500, 2); // 500 rows, 2 attributes
+
+	std::size_t attribute_columns = 2; // number of attribute columns
+	dataset_pair = ReadDataset::readxyz(DATA_PATH, 1276507, 3, 500, attribute_columns); // 500 rows
 
 	DatasetPtr origin_dataset = dataset_pair.first;
 	DatasetPtr clustering_dataset = dataset_pair.second;
 
-
 	Preprocessing::meanNormalize(clustering_dataset);
 
-	Kmeans::clusteringKmeans(clustering_dataset, 3, 100); // clusters, iteration
-
-	// WriteDataset::output_dataset(DATA_PATH, clustering_dataset);
-	// std::cout << dataset->nrows; // total rows: 1276507	
+	std::size_t k = 3; // k - means, k clusters
+	Kmeans::clusteringKmeans(clustering_dataset, k, 100); // clusters, iteration
 	
-	double evaluate = Evaluation::evaluation(clustering_dataset, 3); // k=3
+	std::vector<double> accuracy; // accuracy for each cluster group
+	accuracy.reserve(k);
+	Evaluation::evaluation(clustering_dataset, k, accuracy); // k=3
 
-	//WriteDataset::output_dataset(DATA_PATH, clustering_dataset);
+	// WriteDataset::output_dataset(DATA_PATH, clustering_dataset); // call WriteDataset function
+	// after evaluation() 
 
 	return 0;
 

@@ -139,7 +139,7 @@ void Kmeans::clusteringKmeans(DatasetPtr dataset, std::size_t k, std::size_t ite
 } // end for: fucntion clustering
 
 
-double Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k)
+void Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k, std::vector<double>& accuracy)
 {
     /*
     * select the majority of the clustering results as labels
@@ -175,11 +175,16 @@ double Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k)
         << "mapping for the biggest type and ground truth labels: "
         << " " << "------------------------" << '\n';
 
-    std::cout << "type: " << 0 << " " << " " << "truth: " << a[0] << '\n';
-    std::cout << "type: " << 1 << " " << " " << "truth: " << a[1] << '\n';
-    std::cout << "type: " << 2 << " " << " " << "truth: " << a[2] << '\n';
-    std::cout << "type: " << 3 << " " << " " << "truth: " << a[3] << '\n';
-    std::cout << "type: " << 4 << " " << " " << "truth: " << a[4] << '\n';
+    std::cout << "type: " << 0 << " " << " " << "truth: " << a[0] << "  " << "Building" << '\n';
+
+    std::cout << "type: " << 1 << " " << " " << "truth: " << a[1] << "  " << "User Definable" << '\n';
+
+    std::cout << "type: " << 2 << " " << " " << "truth: " << a[2] << "  " << "Low Vegetation" << '\n';
+
+    std::cout << "type: " << 3 << " " << " " << "truth: " << a[3] << "  " << "User Definable" << '\n';
+
+    std::cout << "type: " << 4 << " " << " " << "truth: " << a[4] << "  " << "High Vegetation" << '\n';
+
     std::cout << '\n';
     
     int current_cluster_group(0); // for output
@@ -196,9 +201,9 @@ double Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k)
             else if (clustering_dataset->truthid(index) == a[4])b[4] += 1;
         } // end for: each row in one clusters
 
-        std::cout << "------------------------" << " "
-            << "numbers of each label in current cluster group: "
+        std::cout << "------------------------" << " " << "current cluster group: "
             << " " << current_cluster_group << " " << "------------------------" << '\n';
+        std::cout << "numbers of each truth label: " << '\n';
 
         std::cout << "type: " << 0 << " " << " " << "truth: " << a[0]
             << " " << " " << "numbers: " << b[0] << '\n';
@@ -238,9 +243,12 @@ double Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k)
             clustering_dataset->cluster(index) = a[biggest_type];
         }
 
+        /*
+        * calculate accuracy for each cluster group
+        */
+
+
         ++current_cluster_group;
     } // end for: each cluster
-
-    return 0;
 
 }
