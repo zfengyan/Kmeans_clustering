@@ -185,20 +185,20 @@ void Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k, std::v
         << "mapping for the biggest type and ground truth labels: "
         << " " << "------------------------" << '\n';
 
-    std::cout << "type: " << 0 << " " << " " << "truth: " << a[0]
-        << " " << " " << "label: " << type_label_map[0] << '\n';
+    std::cout << "type: " << 0 << std::setw(10) << "truth: " << a[0]
+        << std::setw(10) << "label: " << type_label_map[0] << '\n';
 
-    std::cout << "type: " << 1 << " " << " " << "truth: " << a[1]
-        << " " << " " << "label: " << type_label_map[1] << '\n';
+    std::cout << "type: " << 1 << std::setw(10) << "truth: " << a[1]
+        << std::setw(9) << "label: " << type_label_map[1] << '\n';
 
-    std::cout << "type: " << 2 << " " << " " << "truth: " << a[2]
-        << " " << " " << "label: " << type_label_map[2] << '\n';
+    std::cout << "type: " << 2 << std::setw(10) << "truth: " << a[2]
+        << std::setw(10) << "label: " << type_label_map[2] << '\n';
 
-    std::cout << "type: " << 3 << " " << " " << "truth: " << a[3]
-        << " " << " " << "label: " << type_label_map[3] << '\n';
+    std::cout << "type: " << 3 << std::setw(10) << "truth: " << a[3]
+        << std::setw(9) << "label: " << type_label_map[3] << '\n';
 
-    std::cout << "type: " << 4 << " " << " " << "truth: " << a[4]
-        << " " << " " << "label: " << type_label_map[4] << '\n';
+    std::cout << "type: " << 4 << std::setw(10) << "truth: " << a[4]
+        << std::setw(10) << "label: " << type_label_map[4] << '\n';
 
     std::cout << '\n';
     
@@ -220,25 +220,25 @@ void Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k, std::v
             << " " << current_cluster_group << " " << "------------------------" << '\n';
         std::cout << "numbers of each truth label: " << '\n';
 
-        std::cout << "type: " << 0 << " " << " " << "truth: " << a[0]
-            << " " << " " << "label: " << type_label_map[0]
-            << " " << " " << "numbers: " << b[0] << '\n';
+        std::cout << "type: " << 0 << std::setw(10) << "truth: " << a[0]
+            << std::setw(10) << "label: " << type_label_map[0]
+            << std::setw(12) << "numbers: " << b[0] << '\n';
 
-        std::cout << "type: " << 1 << " " << " " << "truth: " << a[1]
-            << " " << " " << "label: " << type_label_map[1]
-            << " " << " " << "numbers: " << b[1] << '\n';
+        std::cout << "type: " << 1 << std::setw(10) << "truth: " << a[1]
+            << std::setw(9) << "label: " << type_label_map[1]
+            << std::setw(17) << "numbers: " << b[1] << '\n';
 
-        std::cout << "type: " << 2 << " " << " " << "truth: " << a[2]
-            << " " << " " << "label: " << type_label_map[2]
-            << " " << " " << "numbers: " << b[2] << '\n';
+        std::cout << "type: " << 2 << std::setw(10) << "truth: " << a[2]
+            << std::setw(10) << "label: " << type_label_map[2]
+            << std::setw(15) << "numbers: " << b[2] << '\n';
 
-        std::cout << "type: " << 3 << " " << " " << "truth: " << a[3]
-            << " " << " " << "label: " << type_label_map[3]
-            << " " << " " << "numbers: " << b[3] << '\n';
+        std::cout << "type: " << 3 << std::setw(10) << "truth: " << a[3]
+            << std::setw(9) << "label: " << type_label_map[3]
+            << std::setw(16) << "numbers: " << b[3] << '\n';
 
-        std::cout << "type: " << 4 << " " << " " << "truth: " << a[4]
-            << " " << " " << "label: " << type_label_map[4]
-            << " " << " " << "numbers: " << b[4] << '\n';
+        std::cout << "type: " << 4 << std::setw(10) << "truth: " << a[4]
+            << std::setw(10) << "label: " << type_label_map[4]
+            << std::setw(16) << "numbers: " << b[4] << '\n';
 
         std::cout << '\n';
 
@@ -280,7 +280,7 @@ void Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k, std::v
             if (clustering_dataset->cluster(index) == clustering_dataset->truthid(index))++correct;
             else ++wrong;
         }
-        std::cout << "Accuracy: " << '\n';
+        std::cout << "Statistics: " << '\n';
         std::cout << "Correct results: " << correct << '\n';
         std::cout << "Wrong results: " << wrong << '\n';
 
