@@ -3,10 +3,12 @@
 /*
 * get all certain format files in one data folder
 */
-void ReadDataset::GetAllFormatFiles(const std::string& path, std::vector<std::string>& files, const std::string& format)
+std::size_t ReadDataset::GetAllFormatFiles(const std::string& path, std::vector<std::string>& files, const std::string& format)
 {
+	std::size_t count_files = 0; // count numbers of files
+	
 	//file handle
-	intptr_t hFile = 0;
+	intptr_t hFile = 0; 
 
 	//file info
 	struct _finddata_t fileinfo;
@@ -27,9 +29,15 @@ void ReadDataset::GetAllFormatFiles(const std::string& path, std::vector<std::st
 			{
 				files.emplace_back(p.assign(path).append("\\").append(fileinfo.name));
 			}
+
+			++count_files;
+
 		} while (_findnext(hFile, &fileinfo) == 0);
 		_findclose(hFile);
 	}
+
+	return count_files;
+
 }
 
 
@@ -40,13 +48,12 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 	const std::string& datapath,
 	std::size_t p_nrows,
 	std::size_t p_ncols,
-	std::size_t p_num_rows,
 	std::size_t p_num_attributes) 
 {
 	std::vector<std::string> files;
 
 	std::string format = ".xyz";
-	GetAllFormatFiles(datapath, files, format);
+	std::size_t countFiles = GetAllFormatFiles(datapath, files, format);
 
 	std::size_t nrows(p_nrows); // to speed up the process of read dataset, obtain the total rows in advance
 	std::size_t ncols(p_ncols); // 3 dimensions: x, y, z
@@ -57,8 +64,8 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 	std::size_t row_index(0); // track the record id in the origin dataset
 	std::size_t x(0), y(1), z(2); // col indexes
 
-	// clustering dataset: 500*n
-	DatasetPtr clustering_dataset = std::make_shared<Dataset>(p_num_rows, p_num_attributes);
+	// clustering dataset: countFiles(500)*n(4)
+	DatasetPtr clustering_dataset = std::make_shared<Dataset>(countFiles, p_num_attributes);
 
 	for (std::size_t i = 0; i != files.size(); ++i) // for each pointcloud file, it contains multiple points, there are 500 files
 	{

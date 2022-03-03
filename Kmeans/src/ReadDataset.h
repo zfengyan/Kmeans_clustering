@@ -28,7 +28,14 @@ struct Point{ // used for storing the points for each pointcloud file
 
 class ReadDataset {
 private:
-	static void GetAllFormatFiles(const std::string& path, std::vector<std::string>& files, const std::string& format);
+	/*
+	* find all certain foramt files inside a certain folder
+	* return the number of found files
+	*/
+	static std::size_t GetAllFormatFiles(
+		const std::string& path, 
+		std::vector<std::string>& files, 
+		const std::string& format);
 public:
 
 	/*
@@ -38,7 +45,6 @@ public:
 		const std::string& datapath,
 		std::size_t p_nrows,
 		std::size_t p_ncols,
-		std::size_t p_num_rows,
 		std::size_t p_num_attributes);
 
 };
