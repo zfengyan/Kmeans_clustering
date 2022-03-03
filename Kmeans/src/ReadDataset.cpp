@@ -42,21 +42,63 @@ std::size_t ReadDataset::GetAllFormatFiles(const std::string& path, std::vector<
 
 
 /*
-* read all 500 files into a dataset
+* get the numbers of all points in all xyz files
 */
-std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
-	const std::string& datapath,
-	std::size_t p_nrows,
-	std::size_t p_ncols,
-	std::size_t p_num_attributes) 
+std::size_t ReadDataset::GetAllpoints(const std::string& path)
+{
+	std::vector<std::string> files;
+	std::string format = ".xyz";
+	std::size_t countFiles = GetAllFormatFiles(path, files, format);
+	
+	std::size_t countPoints(0);
+
+	std::cout << "getting points in all files..." << '\n';
+
+	for (std::size_t i = 0; i != countFiles; ++i) // for each pointcloud file, it contains multiple points, there are 500 files
+	{
+		std::string filename = files[i];
+		LASreadOpener lasreadopener;
+		lasreadopener.set_file_name(filename.c_str());
+		LASreader* lasreader = lasreadopener.open();
+
+		if (!lasreader) {
+			std::cerr << "cannot read las file: " << filename << "\n";
+			exit(1);
+		}
+
+		while (lasreader->read_point()) {
+			++countPoints;
+			
+		} // end while : all the points in one file
+
+		// close the file
+		lasreader->close();
+
+		delete lasreader;
+		lasreader = nullptr;
+	}
+
+	std::cout << "getting points done" << '\n';
+	std::cout << "total points: " << countPoints << '\n';
+	std::cout << '\n';
+	return countPoints;
+
+}
+
+
+/*
+* read all files into a dataset
+*/
+std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(const std::string& datapath) 
 {
 	std::vector<std::string> files;
 
 	std::string format = ".xyz";
 	std::size_t countFiles = GetAllFormatFiles(datapath, files, format);
+	std::size_t numptsAll = GetAllpoints(datapath); // numpts: number of all points in all files
 
-	std::size_t nrows(p_nrows); // to speed up the process of read dataset, obtain the total rows in advance
-	std::size_t ncols(p_ncols); // 3 dimensions: x, y, z
+	std::size_t nrows(numptsAll); // to speed up the process of read dataset, obtain the total rows in advance
+	std::size_t ncols(3); // 3 dimensions: x, y, z
 	DatasetPtr origin_dataset = std::make_shared<Dataset>(nrows, ncols);
 	
 	std::cout << "reading dataset..." << '\n';
@@ -64,11 +106,12 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 	std::size_t row_index(0); // track the record id in the origin dataset
 	std::size_t x(0), y(1), z(2); // col indexes
 
-	// clustering dataset: countFiles(500)*n(4)
-	DatasetPtr clustering_dataset = std::make_shared<Dataset>(countFiles, p_num_attributes);
+	// clustering dataset: countFiles(500) * attribute_columns(4)
+	std::size_t attribute_columns = 4;
+	DatasetPtr clustering_dataset = std::make_shared<Dataset>(countFiles, attribute_columns);
 
 	for (std::size_t i = 0; i != files.size(); ++i) // for each pointcloud file, it contains multiple points, there are 500 files
-	{
+	{	
 		std::cout << files[i] << '\n';
 		std::string filename = files[i];
 		LASreadOpener lasreadopener;
@@ -193,8 +236,8 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 	} // end for : all 500 files
 
 	std::cout << "reading dataset done" << '\n';
-	std::cout << "number of rows(points) of original dataset(all the points in 500 point cloud files): " 
-		<< nrows << '\n'; // total rows: 1276507 
+	std::cout << "number of rows(points) of original dataset(all the points in all point cloud files): " 
+		<< numptsAll << '\n'; // total rows: 1276507 
 	std::cout << '\n';
 
 	return std::make_pair(origin_dataset, clustering_dataset);

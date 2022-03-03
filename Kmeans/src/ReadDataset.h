@@ -36,16 +36,18 @@ private:
 		const std::string& path, 
 		std::vector<std::string>& files, 
 		const std::string& format);
+
+	/*
+	* get the numbers of all points in all xyz files
+	*/
+	static std::size_t GetAllpoints(const std::string& path);
+
 public:
 
 	/*
 	* read all xyz files and return a pointer
 	*/
-	static std::pair<DatasetPtr, DatasetPtr> readxyz(
-		const std::string& datapath,
-		std::size_t p_nrows,
-		std::size_t p_ncols,
-		std::size_t p_num_attributes);
+	static std::pair<DatasetPtr, DatasetPtr> readxyz(const std::string& datapath);
 
 };
 

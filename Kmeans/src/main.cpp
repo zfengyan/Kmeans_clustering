@@ -18,8 +18,6 @@ int main()
 
 	/****************************************************************************/
 
-	std::size_t attribute_columns = 4; // number of attribute columns
-	// design and assign the attributes
 	
 	std::ios::sync_with_stdio(false); // speed up for std::cin and std::cout
 
@@ -27,7 +25,7 @@ int main()
 
 	std::pair<DatasetPtr, DatasetPtr> dataset_pair;
 
-	dataset_pair = ReadDataset::readxyz(DATA_PATH, 1276507, 3, attribute_columns);
+	dataset_pair = ReadDataset::readxyz(DATA_PATH);
 
 	DatasetPtr origin_dataset = dataset_pair.first;
 	DatasetPtr clustering_dataset = dataset_pair.second;
