@@ -25,7 +25,9 @@ int main()
 
 	std::pair<DatasetPtr, DatasetPtr> dataset_pair;
 
-	dataset_pair = ReadDataset::readxyz(DATA_PATH);
+	std::size_t numFeaturePoints(0); // store the number of feature points
+	dataset_pair = ReadDataset::readxyz(DATA_PATH, numFeaturePoints);
+	std::cout << numFeaturePoints << '\n';
 
 	DatasetPtr origin_dataset = dataset_pair.first;
 	DatasetPtr clustering_dataset = dataset_pair.second;
@@ -38,7 +40,7 @@ int main()
 	accuracy.reserve(k);
 
 	std::vector<std::size_t> correctNums; // numbers for correct results
-	correctNums.reserve(500); // maximum numbers: 500(500 feature points in total)
+	correctNums.reserve(numFeaturePoints); // maximum numbers: numFeaturePoints(numFeaturePoints feature points in total)
 
 	std::pair<std::vector<double>, std::vector<std::size_t>> result_pair;
 
@@ -64,18 +66,18 @@ int main()
 	{
 		correctResultNum += recordNum;
 	}
-	std::size_t wrongResultNum = 500 - correctResultNum;
+	std::size_t wrongResultNum = numFeaturePoints - correctResultNum;
 
 	// calculate the overall accuracy
-	double overall_accuracy = (double)correctResultNum / 500;
+	double overall_accuracy = (double)correctResultNum / numFeaturePoints;
 
 	// print the overall statistics
 	std::cout << "------------------------" << " " << "Overall statistics: "
 		<< " " << " " << "------------------------" << '\n';
 
 	std::cout << "Numbers: " << '\n';
-	std::cout << "Correct numbers: " << correctResultNum << " " << "out of " << 500 << '\n';
-	std::cout << "Wrong numbers: " << wrongResultNum << " " << "out of " << 500 << '\n';
+	std::cout << "Correct numbers: " << correctResultNum << " " << "out of " << numFeaturePoints << '\n';
+	std::cout << "Wrong numbers: " << wrongResultNum << " " << "out of " << numFeaturePoints << '\n';
 	std::cout << '\n';
 	std::cout << "Accuracy: " << '\n';
 	std::cout << "Unweighted avg accuracy = " << accumulated_accuracy << '\n';

@@ -47,7 +47,9 @@ public:
 	/*
 	* read all xyz files and return a pointer
 	*/
-	static std::pair<DatasetPtr, DatasetPtr> readxyz(const std::string& datapath);
+	static std::pair<DatasetPtr, DatasetPtr> readxyz(
+		const std::string& datapath,
+		std::size_t& numFeaturePoints);
 
 };
 

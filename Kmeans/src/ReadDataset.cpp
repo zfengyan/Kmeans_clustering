@@ -89,12 +89,14 @@ std::size_t ReadDataset::GetAllpoints(const std::string& path)
 /*
 * read all files into a dataset
 */
-std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(const std::string& datapath) 
+std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
+	const std::string& datapath,
+	std::size_t& numFeaturePoints)
 {
 	std::vector<std::string> files;
 
 	std::string format = ".xyz";
-	std::size_t countFiles = GetAllFormatFiles(datapath, files, format);
+	numFeaturePoints = GetAllFormatFiles(datapath, files, format);
 	std::size_t numptsAll = GetAllpoints(datapath); // numpts: number of all points in all files
 
 	std::size_t nrows(numptsAll); // to speed up the process of read dataset, obtain the total rows in advance
@@ -106,9 +108,9 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(const std::string& datapa
 	std::size_t row_index(0); // track the record id in the origin dataset
 	std::size_t x(0), y(1), z(2); // col indexes
 
-	// clustering dataset: countFiles(500) * attribute_columns(4)
+	// clustering dataset: numFeaturePoints(500) * attribute_columns(4)
 	std::size_t attribute_columns = 4;
-	DatasetPtr clustering_dataset = std::make_shared<Dataset>(countFiles, attribute_columns);
+	DatasetPtr clustering_dataset = std::make_shared<Dataset>(numFeaturePoints, attribute_columns);
 
 	for (std::size_t i = 0; i != files.size(); ++i) // for each pointcloud file, it contains multiple points, there are 500 files
 	{	
@@ -243,4 +245,5 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(const std::string& datapa
 	return std::make_pair(origin_dataset, clustering_dataset);
 
 }
+
 
