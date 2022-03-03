@@ -13,8 +13,10 @@ int main()
 	* set the parameters here
 	* set the attributes: readxyz() file
 	*/
-	std::size_t attribute_columns = 3; // number of attribute columns
+	std::size_t attribute_columns = 4; // number of attribute columns
 	std::size_t k = 5; // k - means, k clusters
+	std::size_t iterations = 100; // iterations for k - means
+
 	/****************************************************************************/
 
 	std::ios::sync_with_stdio(false); // speed up for std::cin and std::cout
@@ -30,7 +32,7 @@ int main()
 
 	Preprocessing::meanNormalize(clustering_dataset);
 	
-	Kmeans::clusteringKmeans(clustering_dataset, k, 100); // clusters, iteration
+	Kmeans::clusteringKmeans(clustering_dataset, k, iterations); // clusters, iteration
 	
 	std::vector<double> accuracy; // accuracy for each cluster group
 	accuracy.reserve(k);

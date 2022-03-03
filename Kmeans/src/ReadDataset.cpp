@@ -156,9 +156,10 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 		/*
 		* designed attributes
 		*/
-		double area = (max_x - min_x) * (max_y - min_y);
-		double height_diff = max_z - min_z;
-		double density = area > 0 ? (count_points / area) : 0;
+		double area = (max_x - min_x) * (max_y - min_y); // attribute 1
+		double height_diff = max_z - min_z; // attribute 2
+		double density = area > 0 ? (count_points / area) : 0; // attribute 3
+		double ratio = (max_y - min_y) > 0 ? ((max_x - min_x) / (max_y - min_y)) : 0; // attribute 4
 
 
 		/*
@@ -171,6 +172,7 @@ std::pair<DatasetPtr, DatasetPtr> ReadDataset::readxyz(
 		clustering_dataset->data(i, 0) = area;
 		clustering_dataset->data(i, 1) = height_diff;
 		clustering_dataset->data(i, 2) = density;
+		clustering_dataset->data(i, 3) = ratio;
 
 		clustering_dataset->fileid(i) = i;
 
