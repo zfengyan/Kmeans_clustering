@@ -171,7 +171,18 @@ double Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k)
     a[2] = 3;
     a[3] = 66;
     a[4] = 5;
+    std::cout << "------------------------" << " "
+        << "mapping for the biggest type and ground truth labels: "
+        << " " << "------------------------" << '\n';
+
+    std::cout << "type: " << 0 << " " << " " << "truth: " << a[0] << '\n';
+    std::cout << "type: " << 1 << " " << " " << "truth: " << a[1] << '\n';
+    std::cout << "type: " << 2 << " " << " " << "truth: " << a[2] << '\n';
+    std::cout << "type: " << 3 << " " << " " << "truth: " << a[3] << '\n';
+    std::cout << "type: " << 4 << " " << " " << "truth: " << a[4] << '\n';
+    std::cout << '\n';
     
+    int current_cluster_group(0); // for output
     for (auto& each_cluster : count) // for each cluster
     {
         int b[5]{}; // count for each label
@@ -185,7 +196,20 @@ double Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k)
             else if (clustering_dataset->truthid(index) == a[4])b[4] += 1;
         } // end for: each row in one clusters
 
-        std::cout << b[0] << " " << b[1] << " " << b[2] << " " << b[3] << " " << b[4] << '\n';
+        std::cout << "------------------------" << " "
+            << "numbers of each label in current cluster group: "
+            << " " << current_cluster_group << " " << "------------------------" << '\n';
+
+        std::cout << "type: " << 0 << " " << " " << "truth: " << a[0]
+            << " " << " " << "numbers: " << b[0] << '\n';
+        std::cout << "type: " << 1 << " " << " " << "truth: " << a[1]
+            << " " << " " << "numbers: " << b[1] << '\n';
+        std::cout << "type: " << 2 << " " << " " << "truth: " << a[2]
+            << " " << " " << "numbers: " << b[2] << '\n';
+        std::cout << "type: " << 3 << " " << " " << "truth: " << a[3]
+            << " " << " " << "numbers: " << b[3] << '\n';
+        std::cout << "type: " << 4 << " " << " " << "truth: " << a[4]
+            << " " << " " << "numbers: " << b[4] << '\n';
 
         // sort
         // NOT sort the elements in array b, sort b[0]~b[5]
@@ -198,13 +222,15 @@ double Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k)
         biggest = biggest > b[3] ? biggest : b[3];
         biggest = biggest > b[4] ? biggest : b[4];
 
-        if (biggest = b[0])biggest_type = 0;
-        else if (biggest = b[1])biggest_type = 1;
-        else if (biggest = b[2])biggest_type = 2;
-        else if (biggest = b[3])biggest_type = 3;
-        else if (biggest = b[4])biggest_type = 4;
+        if (biggest == b[0])biggest_type = 0;
+        else if (biggest == b[1])biggest_type = 1;
+        else if (biggest == b[2])biggest_type = 2;
+        else if (biggest == b[3])biggest_type = 3;
+        else if (biggest == b[4])biggest_type = 4;
 
-        std::cout << biggest << '\n';
+        std::cout << "type with the biggest numbers: " << biggest_type << '\n';
+        std::cout << "selected cluster result for current group: " << a[biggest_type] << '\n';
+        std::cout << '\n';
 
         // set the majority as the classification result
         for (auto& index : each_cluster) // for each row in one cluster
@@ -212,8 +238,7 @@ double Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k)
             clustering_dataset->cluster(index) = a[biggest_type];
         }
 
-        std::cout << "each cluster: " << "\n";
-
+        ++current_cluster_group;
     } // end for: each cluster
 
     return 0;
