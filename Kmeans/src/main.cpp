@@ -29,6 +29,22 @@ int main()
 	accuracy.reserve(k);
 	Evaluation::evaluation(clustering_dataset, k, accuracy); // k=3
 
+	/*
+	* calculate the accuracy
+	*/
+	double accuracy_N = (double)accuracy.size();
+	double accumulate(0);
+	double accumulated_accuracy(0);
+	for (auto& a : accuracy)
+	{
+		accumulate += a;
+	}
+	accumulated_accuracy = accumulate / accuracy_N;
+
+	std::cout << "------------------------" << " " << "Overall accuracy: "
+		<< " " << " " << "------------------------" << '\n';
+	std::cout << "Accuracy = " << accumulated_accuracy << '\n';
+
 	// WriteDataset::output_dataset(DATA_PATH, clustering_dataset); // call WriteDataset function
 	// after evaluation() 
 

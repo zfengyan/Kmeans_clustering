@@ -201,7 +201,7 @@ void Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k, std::v
             else if (clustering_dataset->truthid(index) == a[4])b[4] += 1;
         } // end for: each row in one clusters
 
-        std::cout << "------------------------" << " " << "current cluster group: "
+        std::cout << "------------------------" << " " << "Cluster group: "
             << " " << current_cluster_group << " " << "------------------------" << '\n';
         std::cout << "numbers of each truth label: " << '\n';
 
@@ -246,7 +246,22 @@ void Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k, std::v
         /*
         * calculate accuracy for each cluster group
         */
+        double correct(0); // count: cluster == truth
+        double wrong(0); // count: cluster != truth
+        for (auto& index : each_cluster) // for each row in one cluster
+        {
+            if (clustering_dataset->cluster(index) == clustering_dataset->truthid(index))++correct;
+            else ++wrong;
+        }
+        std::cout << "Accuracy: " << '\n';
+        std::cout << "Correct results: " << correct << '\n';
+        std::cout << "Wrong results: " << wrong << '\n';
 
+        double accuracy_each_group = correct / (correct + wrong);
+        accuracy.emplace_back(accuracy_each_group); // add it to the accuracy vector
+
+        std::cout << "accuracy = " << accuracy_each_group << '\n';
+        std::cout << '\n';
 
         ++current_cluster_group;
     } // end for: each cluster
