@@ -10,14 +10,15 @@ int main()
 {
 	/*
 	* ***************************************************************************
-	* set the parameters here
-	* set the attributes: readxyz() file
+	* adjust the parameters here
 	*/
-	std::size_t attribute_columns = 4; // number of attribute columns
+	
 	std::size_t k = 5; // k - means, k clusters
 	std::size_t iterations = 100; // iterations for k - means
 
 	/****************************************************************************/
+
+	std::size_t attribute_columns = 4; // number of attribute columns
 
 	std::ios::sync_with_stdio(false); // speed up for std::cin and std::cout
 
