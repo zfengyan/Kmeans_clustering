@@ -175,15 +175,15 @@ void Evaluation::evaluation(DatasetPtr clustering_dataset, std::size_t k, std::v
         << "mapping for the biggest type and ground truth labels: "
         << " " << "------------------------" << '\n';
 
-    std::cout << "type: " << 0 << " " << " " << "truth: " << a[0] << "  " << "Building" << '\n';
+    std::cout << "type: " << 0 << " " << " " << "truth: " << a[0] << "  " << "building" << '\n';
 
-    std::cout << "type: " << 1 << " " << " " << "truth: " << a[1] << "  " << "User Definable" << '\n';
+    std::cout << "type: " << 1 << " " << " " << "truth: " << a[1] << "  " << "car" << '\n';
 
-    std::cout << "type: " << 2 << " " << " " << "truth: " << a[2] << "  " << "Low Vegetation" << '\n';
+    std::cout << "type: " << 2 << " " << " " << "truth: " << a[2] << "  " << "fence" << '\n';
 
-    std::cout << "type: " << 3 << " " << " " << "truth: " << a[3] << "  " << "User Definable" << '\n';
+    std::cout << "type: " << 3 << " " << " " << "truth: " << a[3] << "  " << "pole" << '\n';
 
-    std::cout << "type: " << 4 << " " << " " << "truth: " << a[4] << "  " << "High Vegetation" << '\n';
+    std::cout << "type: " << 4 << " " << " " << "truth: " << a[4] << "  " << "tree" << '\n';
 
     std::cout << '\n';
     
