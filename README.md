@@ -1,4 +1,4 @@
-# Kmeans_clustering
+# Kmeans-clustering
 
 About classfication codes: https://desktop.arcgis.com/en/arcmap/latest/manage-data/las-dataset/lidar-point-classification.htm
 
