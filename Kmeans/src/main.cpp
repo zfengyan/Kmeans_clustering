@@ -87,6 +87,7 @@ int main()
 	std::cout << "Accuracy: " << '\n';
 	std::cout << "Unweighted avg accuracy = " << accumulated_accuracy << '\n';
 	std::cout << "Overall accuracy = " << overall_accuracy << '\n';
+	std::cout << '\n';
 
 	// write messages to the report
 	std::string filepath = DATA_PATH;
@@ -117,12 +118,20 @@ int main()
 	* write classification result of dataset
 	*/
 
+	std::cout << "Writing result..." << '\n';
+
 	// write original ground truth dataset
-	WriteDataset::output_dataset(DATA_PATH, origin_dataset); 
+	WriteDataset::output_origin_dataset(DATA_PATH, origin_dataset);
 	
-	
-	// call WriteDataset function
-	// after evaluation() 
+	// assign the result to the origin_dataset
+	// each point's cluster is associated with its file's cluster
+	// !NB!: call this function after the Evaluation::evaluation() function
+	WriteDataset::assign_result_dataset(origin_dataset, clustering_dataset);
+
+	// write original classification dataset
+	WriteDataset::output_result_dataset(DATA_PATH, origin_dataset);
+
+	std::cout << "Writing result done" << '\n';
 
 	return 0;
 
