@@ -32,6 +32,6 @@ the classification dataset(combining the 500 pointcloud files) -- dataset_result
 
 **Accuracy**: 
 
-**Unweighted avg accuracy** = 0.776148 -- the average of the accuracy rates for the five categories
+**Avg accuracy (mAcc)** = 0.776148 -- the average of the accuracy rates for the five categories
 
-**Overall accuracy** = 0.698 -- total numbers of correct data / total numbers of data
+**Overall accuracy (OA)** = 0.698 -- total numbers of correct data / total numbers of data
