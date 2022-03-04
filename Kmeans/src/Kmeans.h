@@ -2,6 +2,7 @@
 #define _KMEANS_
 
 #include <iostream>
+#include <fstream>
 #include <cassert>
 #include <vector>
 #include <algorithm>
@@ -21,6 +22,7 @@ public:
 		DatasetPtr clustering_dataset, 
 		std::size_t k, 
 		std::pair<std::vector<double>, std::vector<std::size_t>>& result_pair);
+
 };
 
 #endif // !_KMEANS_

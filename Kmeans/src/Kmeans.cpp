@@ -184,6 +184,7 @@ void Evaluation::evaluation(
     type_label_map.insert(std::pair<int, std::string>(3, "pole"));
     type_label_map.insert(std::pair<int, std::string>(4, "tree"));
 
+    // print messages
     std::cout << "------------------------" << " "
         << "Mapping for the type - ground truth - labels: "
         << " " << "------------------------" << '\n';
@@ -204,6 +205,37 @@ void Evaluation::evaluation(
         << std::setw(10) << "label: " << type_label_map[4] << '\n';
 
     std::cout << '\n';
+
+    // write the messages to the report
+    std::string filepath = DATA_PATH;
+    std::string filesuffix = "/report.txt";
+    std::string filename = filepath + filesuffix;
+
+    std::ofstream myfile;
+    myfile.open(filename, std::ios::app); // app: append
+
+    myfile << "------------------------" << " "
+        << "Mapping for the type - ground truth - labels: "
+        << " " << "------------------------" << '\n';
+
+    myfile << "type: " << 0 << std::setw(10) << "truth: " << a[0]
+        << std::setw(10) << "label: " << type_label_map[0] << '\n';
+
+    myfile << "type: " << 1 << std::setw(10) << "truth: " << a[1]
+        << std::setw(9) << "label: " << type_label_map[1] << '\n';
+
+    myfile << "type: " << 2 << std::setw(10) << "truth: " << a[2]
+        << std::setw(10) << "label: " << type_label_map[2] << '\n';
+
+    myfile << "type: " << 3 << std::setw(10) << "truth: " << a[3]
+        << std::setw(9) << "label: " << type_label_map[3] << '\n';
+
+    myfile << "type: " << 4 << std::setw(10) << "truth: " << a[4]
+        << std::setw(10) << "label: " << type_label_map[4] << '\n';
+
+    myfile << '\n';
+
+    // write file
     
     int current_cluster_group(0); // for output
     for (auto& each_cluster : count) // for each cluster
@@ -219,6 +251,8 @@ void Evaluation::evaluation(
             else if (clustering_dataset->truthid(index) == a[4])b[4] += 1;
         } // end for: each row in one clusters
 
+
+        // print messages
         std::cout << "------------------------" << " " << "Cluster group: "
             << " " << current_cluster_group << " " << "------------------------" << '\n';
         std::cout << "numbers of each truth label: " << '\n';
@@ -244,6 +278,39 @@ void Evaluation::evaluation(
             << std::setw(16) << "numbers: " << b[4] << '\n';
 
         std::cout << '\n';
+        // print messages
+
+
+        // write the messages to the report
+
+        myfile << "------------------------" << " " << "Cluster group: "
+            << " " << current_cluster_group << " " << "------------------------" << '\n';
+        myfile << "numbers of each truth label: " << '\n';
+
+        myfile << "type: " << 0 << std::setw(10) << "truth: " << a[0]
+            << std::setw(10) << "label: " << type_label_map[0]
+            << std::setw(12) << "numbers: " << b[0] << '\n';
+
+        myfile << "type: " << 1 << std::setw(10) << "truth: " << a[1]
+            << std::setw(9) << "label: " << type_label_map[1]
+            << std::setw(17) << "numbers: " << b[1] << '\n';
+
+        myfile << "type: " << 2 << std::setw(10) << "truth: " << a[2]
+            << std::setw(10) << "label: " << type_label_map[2]
+            << std::setw(15) << "numbers: " << b[2] << '\n';
+
+        myfile << "type: " << 3 << std::setw(10) << "truth: " << a[3]
+            << std::setw(9) << "label: " << type_label_map[3]
+            << std::setw(16) << "numbers: " << b[3] << '\n';
+
+        myfile << "type: " << 4 << std::setw(10) << "truth: " << a[4]
+            << std::setw(10) << "label: " << type_label_map[4]
+            << std::setw(16) << "numbers: " << b[4] << '\n';
+
+        myfile << '\n';
+
+        // write file
+
 
         // sort
         // NOT sort the elements in array b, sort b[0]~b[5]
@@ -267,6 +334,13 @@ void Evaluation::evaluation(
         std::cout << "label for this cluster group: " << type_label_map[biggest_type] << '\n';
         std::cout << '\n';
 
+        // write the messages to the report
+        myfile << "type with the biggest numbers: " << biggest_type << '\n';
+        myfile << "selected truth for current group's clustering result: " << a[biggest_type] << '\n';
+        myfile << "label for this cluster group: " << type_label_map[biggest_type] << '\n';
+        myfile << '\n';
+        // write the messages
+
         // set the majority as the classification result
         for (auto& index : each_cluster) // for each row in one cluster
         {
@@ -287,6 +361,13 @@ void Evaluation::evaluation(
         std::cout << "Correct results: " << correct << " " << "out of " << (correct + wrong) << '\n';
         std::cout << "Wrong results: " << wrong << " " << "out of " << (correct + wrong) << '\n';
 
+        // write messages to the report
+        myfile << "Statistics: " << '\n';
+        myfile << "Correct results: " << correct << " " << "out of " << (correct + wrong) << '\n';
+        myfile << "Wrong results: " << wrong << " " << "out of " << (correct + wrong) << '\n';
+        // write messages
+
+
         double accuracy_each_group = correct / (correct + wrong);
         result_pair.first.emplace_back(accuracy_each_group); // add it to the accuracy vector
         result_pair.second.emplace_back((std::size_t)correct); // add correct numbers to the correctNums vector
@@ -294,7 +375,15 @@ void Evaluation::evaluation(
         std::cout << "accuracy = " << accuracy_each_group << '\n';
         std::cout << '\n';
 
+        // write messages to the report
+        myfile << "accuracy = " << accuracy_each_group << '\n';
+        myfile << '\n';
+        // write messages
+
         ++current_cluster_group;
     } // end for: each cluster
+
+    // close the output file
+    myfile.close();
 
 }

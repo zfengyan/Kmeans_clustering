@@ -88,6 +88,28 @@ int main()
 	std::cout << "Unweighted avg accuracy = " << accumulated_accuracy << '\n';
 	std::cout << "Overall accuracy = " << overall_accuracy << '\n';
 
+	// write messages to the report
+	std::string filepath = DATA_PATH;
+	std::string filesuffix = "/report.txt";
+	std::string filename = filepath + filesuffix;
+
+	std::ofstream myfile;
+	myfile.open(filename, std::ios::app); // app: append
+
+	myfile << "------------------------" << " " << "Overall statistics: "
+		<< " " << " " << "------------------------" << '\n';
+
+	myfile << "Numbers: " << '\n';
+	myfile << "Correct numbers: " << correctResultNum << " " << "out of " << numFeaturePoints << '\n';
+	myfile << "Wrong numbers: " << wrongResultNum << " " << "out of " << numFeaturePoints << '\n';
+	myfile << '\n';
+	myfile << "Accuracy: " << '\n';
+	myfile << "Unweighted avg accuracy = " << accumulated_accuracy << '\n';
+	myfile << "Overall accuracy = " << overall_accuracy << '\n';
+
+	myfile.close();
+	// write messages
+
 	// WriteDataset::output_dataset(DATA_PATH, clustering_dataset); // call WriteDataset function
 	// after evaluation() 
 
