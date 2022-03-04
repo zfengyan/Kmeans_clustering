@@ -1,4 +1,4 @@
-Infomation:
+**Infomation**:
 
 **data** -- contains all .xyz files and result files(two .laz files and one .txt file)
 
