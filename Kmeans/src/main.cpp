@@ -110,7 +110,18 @@ int main()
 	myfile.close();
 	// write messages
 
-	// WriteDataset::output_dataset(DATA_PATH, clustering_dataset); // call WriteDataset function
+
+	/*
+	* write dataset: 
+	* write original ground truth dataset
+	* write classification result of dataset
+	*/
+
+	// write original ground truth dataset
+	WriteDataset::output_dataset(DATA_PATH, origin_dataset); 
+	
+	
+	// call WriteDataset function
 	// after evaluation() 
 
 	return 0;

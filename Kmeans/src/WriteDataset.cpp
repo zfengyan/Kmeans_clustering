@@ -1,5 +1,8 @@
 #include "WriteDataset.h"
 
+/*
+* write original ground truth point cloud to the file
+*/
 void WriteDataset::output_dataset(const std::string& filepath, DatasetPtr dataset){
     /*
     Function to write a new LAS/LAZ file with point labels (for the classification field)
@@ -8,7 +11,7 @@ void WriteDataset::output_dataset(const std::string& filepath, DatasetPtr datase
     dataset :   input dataset
     Labels  :   Uses LAS/LAZ classification codes: https://desktop.arcgis.com/en/arcmap/latest/manage-data/las-dataset/lidar-point-classification.htm
     */
-    std::string filename = filepath + "/result.laz";
+    std::string filename = filepath + "/dataset_true.laz";
 
     LASwriteOpener laswriteopener;
     laswriteopener.set_file_name(filename.c_str());
@@ -39,11 +42,10 @@ void WriteDataset::output_dataset(const std::string& filepath, DatasetPtr datase
         // set xyz of points(the xyz coordinates are preprocessed)
         laspoint.set_x(dataset->data(i, x));
         laspoint.set_y(dataset->data(i, y));
-        laspoint.set_z(0); // now the clustering_dataset only has two attributes
-        //laspoint.set_z(dataset->data(i, z));
+        laspoint.set_z(dataset->data(i, z));
 
         // set classification
-        laspoint.set_classification((int)dataset->cluster(i));
+        laspoint.set_classification((int)dataset->truthid(i));
 
         // write points
         laswriter->write_point(&laspoint);

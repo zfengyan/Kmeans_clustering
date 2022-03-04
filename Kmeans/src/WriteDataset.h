@@ -5,6 +5,9 @@
 
 class WriteDataset {
 public:
+	/*
+	* write original ground truth point cloud to the file
+	*/
 	static void output_dataset(const std::string& filename, DatasetPtr dataset);
 };
 
