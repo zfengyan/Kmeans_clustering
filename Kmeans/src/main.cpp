@@ -21,21 +21,25 @@ int main()
 	
 	std::ios::sync_with_stdio(false); // speed up for std::cin and std::cout
 
+
 	std::cout << "Hello CMake." << '\n';
+
 
 	std::pair<DatasetPtr, DatasetPtr> dataset_pair;
 
+
 	std::size_t numFeaturePoints(0); // store the number of feature points
 	dataset_pair = ReadDataset::readxyz(DATA_PATH, numFeaturePoints);
-	std::cout << numFeaturePoints << '\n';
+	
 
 	DatasetPtr origin_dataset = dataset_pair.first;
 	DatasetPtr clustering_dataset = dataset_pair.second;
 
-	Preprocessing::meanNormalize(clustering_dataset);
-	
+
+	Preprocessing::meanNormalize(clustering_dataset);	
 	Kmeans::clusteringKmeans(clustering_dataset, k, iterations); // clusters, iteration
 	
+
 	std::vector<double> accuracy; // accuracy for each cluster group
 	accuracy.reserve(k);
 
@@ -45,6 +49,7 @@ int main()
 	std::pair<std::vector<double>, std::vector<std::size_t>> result_pair;
 
 	Evaluation::evaluation(clustering_dataset, k, result_pair);
+
 
 	/*
 	* calculate the overall statistics
