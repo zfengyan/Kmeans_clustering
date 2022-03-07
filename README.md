@@ -1,17 +1,37 @@
-# Kmeans_clustering
+# Kmeans-clustering
 
 About classfication codes: https://desktop.arcgis.com/en/arcmap/latest/manage-data/las-dataset/lidar-point-classification.htm
 
+Some data structures referenced : https://github.com/luizgh/knn
+
 the input dataset(combining the 500 pointcloud files) -- dataset_truth.laz:
 
-![image](https://user-images.githubusercontent.com/72781910/154722685-b0e57383-ccd9-47f6-bb0e-eb61ee04494c.png)
+<img width="663" alt="dataset_truth" src="https://user-images.githubusercontent.com/72781910/156752307-a595f68e-2b45-4458-b355-b3e8f5e95239.PNG">
 
-For each point cloud file, select its area and height_diff as two attributes:
+the classification dataset(combining the 500 pointcloud files) -- dataset_result.laz:
 
-Before preprocessing, and colored with its ground truth:
+<img width="664" alt="dataset_result" src="https://user-images.githubusercontent.com/72781910/156752428-751f3c5a-2f77-4b34-a023-d980eff1fa48.PNG">
 
-<img width="483" alt="kmeans" src="https://user-images.githubusercontent.com/72781910/155534664-de7c9f63-432b-479b-9cb9-09d8fe24e6fb.PNG">
+**Designed features**:
 
-After preprocessing, colored with its ground truth:
+(1) **area** : (max_x - min_x) * (max_y - min_y)
 
-<img width="265" alt="kmeans_preprocessed_colored" src="https://user-images.githubusercontent.com/72781910/155534729-855ae22a-57a5-485f-a5af-3885989b55eb.PNG">
+(2) **height difference** : max_z - min_z
+
+(3) **density** : number of points in one file / area
+
+(4)	**ratio** : x_distance / y_distance (the ratio of width / height)
+
+**------------------------ Overall statistics:   ------------------------**
+
+**Numbers**: 
+
+**Correct numbers**: 349 out of 500
+
+**Wrong numbers**: 151 out of 500
+
+**Accuracy**: 
+
+**Avg accuracy (mAcc)** = 0.776148 -- the average of the accuracy rates for the five categories
+
+**Overall accuracy (OA)** = 0.698 -- total numbers of correct data / total numbers of data
