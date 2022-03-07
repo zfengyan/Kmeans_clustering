@@ -31,6 +31,18 @@ The output files are in the same [data](https://github.com/SEUZFY/Kmeans_cluster
 
 [report.txt](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/report.txt) -- the classification statistics report
 
+`Comment`: 
+
+[Manhattan distance](https://iq.opengenus.org/manhattan-distance/) is used by default in this program as the method of calculating distance between feature points.
+
+[Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) has also been tested, the corresponding result files are:
+
+[dataset_result_euclideanDistance.laz](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/dataset_result_euclideanDistance.laz)
+
+[report_euclidean.txt](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/report_euclidean.txt)
+
+Generally speaking, after testing, the clustering result using **Manhattan distance** is relatively ideal, so **Manhattan distance** is used as the default method of calculating distance between feature points.
+
 ## Designed features:
 
 (1) **area** : (max_x - min_x) * (max_y - min_y)
