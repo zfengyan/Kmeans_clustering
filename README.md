@@ -1,10 +1,27 @@
 # Kmeans-clustering
 
-About classfication codes: https://desktop.arcgis.com/en/arcmap/latest/manage-data/las-dataset/lidar-point-classification.htm
+About classfication encoding: https://desktop.arcgis.com/en/arcmap/latest/manage-data/las-dataset/lidar-point-classification.htm
 
 Some data structures referenced : https://github.com/luizgh/knn
 
-the input dataset(combining the 500 pointcloud files) -- dataset_truth.laz:
+## HOW TO USE
+
+`build:` 
+Use all files inside [src](https://github.com/SEUZFY/Kmeans_clustering/tree/master/Kmeans/src) folder to build this project. 
+Please be aware of the settings of the [CMakeLists.txt](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/CMakeLists.txt)
+if the program runs across platforms.
+
+`Compile and run:`
+After compiling the files, A binary executable file would be obtained. Run it directly and no arguments are required.
+
+## INPUT
+It automatically reads in all .xyz files inside [data](https://github.com/SEUZFY/Kmeans_clustering/tree/master/Kmeans/data).
+
+## OUTPUT
+
+The output files are in the same [data](https://github.com/SEUZFY/Kmeans_clustering/tree/master/Kmeans/data) folder as the input files.
+
+The ground truth dataset(combining the 500 pointcloud files) -- [dataset_truth.laz](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/dataset_result.laz):
 
 <img width="663" alt="dataset_truth" src="https://user-images.githubusercontent.com/72781910/156752307-a595f68e-2b45-4458-b355-b3e8f5e95239.PNG">
 
