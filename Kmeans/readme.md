@@ -1,6 +1,6 @@
 **Infomation**:
 
-**data** -- contains all .xyz files and result files(two .laz files and one .txt file)
+**data** -- contains all .xyz files and result files(two result .laz files and two .txt files)
 
 **extern/LAStools** -- external denpendencies to read and write point cloud files
 
