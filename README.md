@@ -1,6 +1,7 @@
 # Kmeans-clustering
 
-About classfication encoding: https://desktop.arcgis.com/en/arcmap/latest/manage-data/las-dataset/lidar-point-classification.htm
+About classfication encoding: 
+https://desktop.arcgis.com/en/arcmap/latest/manage-data/las-dataset/lidar-point-classification.htm
 
 Some data structures referenced : https://github.com/luizgh/knn
 
