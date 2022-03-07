@@ -15,21 +15,23 @@ if the program runs across platforms.
 After compiling the files, A binary executable file would be obtained. Run it directly and no arguments are required.
 
 ## INPUT
-It automatically reads in all .xyz files inside [data](https://github.com/SEUZFY/Kmeans_clustering/tree/master/Kmeans/data).
+It automatically reads in all .xyz files inside [data](https://github.com/SEUZFY/Kmeans_clustering/tree/master/Kmeans/data) folder.
 
 ## OUTPUT
 
 The output files are in the same [data](https://github.com/SEUZFY/Kmeans_clustering/tree/master/Kmeans/data) folder as the input files.
 
-The ground truth dataset(combining the 500 pointcloud files) -- [dataset_truth.laz](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/dataset_result.laz):
+[dataset_truth.laz](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/dataset_truth.laz) -- the ground truth dataset (combining the 500 pointcloud files)
 
 <img width="663" alt="dataset_truth" src="https://user-images.githubusercontent.com/72781910/156752307-a595f68e-2b45-4458-b355-b3e8f5e95239.PNG">
 
-the classification dataset(combining the 500 pointcloud files) -- dataset_result.laz:
+[dataset_result.laz](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/dataset_result.laz) -- the classification dataset(combining the 500 pointcloud files) 
 
 <img width="664" alt="dataset_result" src="https://user-images.githubusercontent.com/72781910/156752428-751f3c5a-2f77-4b34-a023-d980eff1fa48.PNG">
 
-**Designed features**:
+[report.txt](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/report.txt) -- the classification statistics report
+
+## Designed features:
 
 (1) **area** : (max_x - min_x) * (max_y - min_y)
 
@@ -39,7 +41,7 @@ the classification dataset(combining the 500 pointcloud files) -- dataset_result
 
 (4)	**ratio** : x_distance / y_distance (the ratio of width / height)
 
-**------------------------ Overall statistics:   ------------------------**
+## Overall statistics:
 
 **Numbers**: 
 
