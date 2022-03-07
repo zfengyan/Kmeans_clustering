@@ -105,8 +105,8 @@ int main()
 	myfile << "Wrong numbers: " << wrongResultNum << " " << "out of " << numFeaturePoints << '\n';
 	myfile << '\n';
 	myfile << "Accuracy: " << '\n';
-	myfile << "Unweighted avg accuracy = " << accumulated_accuracy << '\n';
-	myfile << "Overall accuracy = " << overall_accuracy << '\n';
+	myfile << "Avg accuracy (mAcc) = " << accumulated_accuracy << '\n';
+	myfile << "Overall accuracy (OA)  = " << overall_accuracy << '\n';
 
 	myfile.close();
 	// write messages
