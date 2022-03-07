@@ -8,12 +8,16 @@ Some data structures referenced : https://github.com/luizgh/knn
 ## HOW TO USE
 
 `build:` 
+
+All files can be downloaded [here](https://github.com/SEUZFY/Kmeans_clustering/releases/tag/Kmeans-v1.0).
+
 Use all files inside [src](https://github.com/SEUZFY/Kmeans_clustering/tree/master/Kmeans/src) folder to build this project. 
 Please be aware of the settings of the [CMakeLists.txt](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/CMakeLists.txt)
 if the program runs across platforms.
 
 `Compile and run:`
-After compiling the files, A binary executable file would be obtained. Run it directly and no arguments are required.
+
+After compiling all the source files, a binary executable file (**Kmeans.exe**) would be obtained. Run it directly and no arguments are required.
 
 ## INPUT
 It automatically reads in all .xyz files inside [data](https://github.com/SEUZFY/Kmeans_clustering/tree/master/Kmeans/data) folder.
