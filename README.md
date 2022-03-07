@@ -21,27 +21,25 @@ It automatically reads in all .xyz files inside [data](https://github.com/SEUZFY
 
 The output files are in the same [data](https://github.com/SEUZFY/Kmeans_clustering/tree/master/Kmeans/data) folder as the input files.
 
-[dataset_truth.laz](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/dataset_truth.laz) -- the ground truth dataset (combining the 500 pointcloud files)
+* [dataset_truth.laz](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/dataset_truth.laz) -- the ground truth dataset (combining the 500 pointcloud files)
 
 <img width="663" alt="dataset_truth" src="https://user-images.githubusercontent.com/72781910/156752307-a595f68e-2b45-4458-b355-b3e8f5e95239.PNG">
 
-[dataset_result.laz](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/dataset_result.laz) -- the classification dataset(combining the 500 pointcloud files) 
+* [dataset_result.laz](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/dataset_result.laz) -- the classification dataset(combining the 500 pointcloud files) 
 
 <img width="664" alt="dataset_result" src="https://user-images.githubusercontent.com/72781910/156752428-751f3c5a-2f77-4b34-a023-d980eff1fa48.PNG">
 
-[report.txt](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/report.txt) -- the classification statistics report
+* [report.txt](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/report.txt) -- the classification statistics report
 
 `Comment`: 
 
-[Manhattan distance](https://iq.opengenus.org/manhattan-distance/) is used by default in this program as the method of calculating distance between feature points.
+[Manhattan distance](https://iq.opengenus.org/manhattan-distance/) is used by default in this program as using it has an relatively ideal result.
 
 [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) has also been tested, the corresponding result files are:
 
-[dataset_result_euclideanDistance.laz](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/dataset_result_euclideanDistance.laz)
+* [dataset_result_euclideanDistance.laz](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/dataset_result_euclideanDistance.laz)
 
-[report_euclidean.txt](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/report_euclidean.txt)
-
-Generally speaking, after testing, the clustering result using **Manhattan distance** is relatively ideal, so **Manhattan distance** is used as the default method of calculating distance between feature points.
+* [report_euclidean.txt](https://github.com/SEUZFY/Kmeans_clustering/blob/master/Kmeans/data/report_euclidean.txt)
 
 ## Designed features:
 
